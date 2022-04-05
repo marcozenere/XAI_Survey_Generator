@@ -1,5 +1,6 @@
 import nbformat as nbf
 import ipywidgets as widgets
+import os
 
 def question1RadioButtons():
 
@@ -420,6 +421,25 @@ submit_button.on_click(submit_clicked)"""
     code_17 = """\
 welcomeWebPage()"""
     
+    # Directories Creation
+    if not os.path.exists('./test'):
+        os.mkdir('./XAI_Questionnaire')
+    
+    # Readme and requirements files creations
+    readme_text = '''# Readme
+
+In the notebook file "Questionnaire_Template.ipynb" you will find all the details for filling it with your information. 
+
+The notebook can be executed with Voilà library to make the application an interactive web app, and can be hosted in Binder. 
+
+Further information on how to use Voilà and binder can be found [here](https://voila.readthedocs.io/en/stable/index.html).
+
+The 'requirements.txt' file contains the libraries needed to run the application with Voilà in Binder. If you use additional libraries than the basic ones in your notebook, they must be added to this file.
+'''
+
+    requirements_text = ['pandas\n', 'numpy\n', 'ipywidgets\n', 'voila\n']
+
+    # Notebook cells
     nb['cells'] = [
                nbf.v4.new_code_cell(code_0),
                nbf.v4.new_code_cell(code_1),
@@ -441,4 +461,10 @@ welcomeWebPage()"""
                nbf.v4.new_code_cell(code_17)
     ]
     
-    nbf.write(nb,'./Output/Questionnaire_Template.ipynb')
+    nbf.write(nb,'./XAI_Questionnaire/Questionnaire_Template.ipynb')
+    
+    with open('./XAI_Questionnaire/readme.md', 'w') as readme:
+        readme.write(readme_text)
+    
+    with open('./XAI_Questionnaire/requirements.txt', 'w') as requirements:
+        requirements.writelines(requirements_text)
