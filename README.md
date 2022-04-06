@@ -1,3 +1,5 @@
 # XAI_Survey_Generator
 
-Python code for generating a XAI Survey Template with the respect to the user needs
+Jupyter notebook written in Python for generating a XAI Survey Template with the respect to the user needs.
+
+The folder 'Script' contains the same program in python script fashion.

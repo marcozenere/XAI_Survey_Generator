@@ -1,27 +1,10 @@
 import nbformat as nbf
-import ipywidgets as widgets
 import os
 
-def question1RadioButtons():
-
-    return widgets.RadioButtons(
-        options=[('Qualitative Evaluation', '1'), ('Quantitative Evaluation', '2')],
-        value=None,
-        disabled=False
-        )
-
-def question2RadioButtons():
-    return widgets.RadioButtons(
-        options=[('Verification Task', '1'), ('Forced Choice', '2'), ('Forward Simulation', '3'), ('Counterfactual Simulation Task', '4')],
-        value=None,
-        disabled=False
-        )
-
-    
 def verificationTaskTemplate(evaluation_type): 
     code = """"""
     
-    if evaluation_type.value == '1':
+    if evaluation_type == '1':
         code += """\
 def questionWebPage():
     output.clear_output()
@@ -205,7 +188,7 @@ questions_representation = []"""
 
     code_4 = """"""
 
-    if evaluation_type.value == '1':
+    if evaluation_type == '1':
         code_4 += """\
 # Preparation of the Questions section of the survey
 
@@ -216,7 +199,7 @@ for x in range(N):
         disabled=False
     ))
 # Select the samples you want to use in your evaluation"""
-    elif evaluation_type.value == '2' and methodology.value == '1':
+    elif evaluation_type == '2' and methodology == '1':
         code_4 += """\
 # Preparation of the Questions section of the survey
 
@@ -323,11 +306,11 @@ def questionnaireInstructionWebPage():
     
     code_11 = """"""
     
-    if methodology.value == '1':
+    if methodology == '1':
         code_11 += verificationTaskTemplate(evaluation_type)
-    elif methodology.value == '2':
+    elif methodology == '2':
         code_11 += forcedChoiceTemplate()
-    elif methodology.value == '3':
+    elif methodology == '3':
         code_11 += forwardSimulationTemplate()
     else:
         code_11 += counterfactualSimulationTask()
