@@ -42,7 +42,7 @@ def questionWebPage():
         # Explanation
         display(widgets.HTML(value = '''<p>Explanation of the output</p>'''))
         
-        display(widgets.HTML(value = '''<p>How much are you satisfied with the explanation?</p>'''))
+        display(widgets.HTML(value = '''<h3>How much are you satisfied with the explanation?</h3>'''))
         display(questions_selection[question_number])
         display(next_button)
     
@@ -69,7 +69,7 @@ def questionWebPage():
         # Explanation
         display(widgets.HTML(value = '''<p>Explanation of the output</p>'''))
         # 5 points-Likert Scale satisfaction
-        display(widgets.HTML(value = '''<p>How much are you satisfied with the explanation? (1 = not satisfied at all, 5 = definitely satisfied)</p>'''))
+        display(widgets.HTML(value = '''<h3>How much are you satisfied with the explanation? (1 = not satisfied at all, 5 = definitely satisfied)</h3>'''))
         display(questions_selection[question_number])
         display(next_button)
     
@@ -101,7 +101,7 @@ def questionWebPage():
         display(widgets.HTML(value = '''<p>Second explanation of the output</p>'''))
         display(widgets.HTML(value = '''<p>Third Explanation of the output</p>'''))
         
-        display(widgets.HTML(value = '''<p>Which of the following explanations do you prefer the most?</p>'''))
+        display(widgets.HTML(value = '''<h3>Which of the following explanations do you prefer the most?</h3>'''))
         display(questions_selection[question_number])
         display(next_button)
     
@@ -128,7 +128,7 @@ def questionWebPage():
         # Explanation
         display(widgets.HTML(value = '''<p>Explanation of the system's output</p>'''))
         
-        display(widgets.HTML(value = '''<p>Which is the output of the system given the input and the explanation?</p>'''))
+        display(widgets.HTML(value = '''<h3>Which is the output of the system given the input and the explanation?</h3>'''))
         display(questions_selection[question_number])
         display(next_button)
     
@@ -162,7 +162,7 @@ def questionWebPage():
         # Output sample 2
         display(widgets.HTML(value = '''<p>Considering the output with respect to the sample 2</p>'''))
         
-        display(widgets.HTML(value = '''<p>How the input should change to get the output of the sample 2?</p>'''))
+        display(widgets.HTML(value = '''<h3>How the input should change to get the output of the sample 2?</h3>'''))
         display(questions_selection[question_number])
         display(next_button)
     
@@ -194,7 +194,7 @@ submit_button = widgets.Button(
 output = widgets.Output()"""
 
     code_2 = """\
-# Warm-Up Section elements definition (radio buttons, dropdowns, etc)"""
+# Comprehension Test Section elements definition (radio buttons, dropdowns, etc)"""
     
     code_3 = """\
 #define N, the number of questions in the questionnaire
