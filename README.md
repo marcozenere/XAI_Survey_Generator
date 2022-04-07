@@ -1,4 +1,4 @@
-# XAI_Survey_Generator
+# XAI Survey Generator
 
 Jupyter notebook written in Python for generating a XAI Survey Template with the respect to the user needs.
 

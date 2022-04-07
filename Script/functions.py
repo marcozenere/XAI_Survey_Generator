@@ -289,10 +289,10 @@ def exampleWebPage():
         display(next_button)"""
     
     code_9 = """\
-def warmUpWebPage():
+def comprehensionTestWebPage():
     output.clear_output()
     with output:
-        display(widgets.HTML(value = '''<h2>Warm-Up</h2>'''))
+        display(widgets.HTML(value = '''<h2>Comprehension Test</h2>'''))
         # Test the user's mental model by asking some questions regarding the XAI explanation/domain of interest
         display(next_button)"""
     
@@ -353,7 +353,7 @@ def endquestionnaireWebPage():
         Thank you very much for the partecipation.</p>'''))"""
     
     code_14 = """\
-web_pages_order = [introductionWebPage, exampleWebPage, warmUpWebPage, questionnaireInstructionWebPage, participatInfoWebPage, endquestionnaireWebPage]
+web_pages_order = [introductionWebPage, exampleWebPage, comprehensionTestWebPage, questionnaireInstructionWebPage, participatInfoWebPage, endquestionnaireWebPage]
 
 index_element = web_pages_order.index(questionnaireInstructionWebPage)
 
@@ -361,7 +361,7 @@ for x in range(N):
     web_pages_order.insert(index_element + 1, questionWebPage)"""
     
     code_15 = """\
-web_pages = ['welcomeWebPage', 'introductionWebPage', 'exampleWebPage', 'warmUpWebPage', 'questionnaireInstructionWebPage', 'participatInfoWebPage', 'endquestionnaireWebPage']
+web_pages = ['welcomeWebPage', 'introductionWebPage', 'exampleWebPage', 'comprehensionTestWebPage', 'questionnaireInstructionWebPage', 'participatInfoWebPage', 'endquestionnaireWebPage']
 
 index_element = web_pages.index('questionnaireInstructionWebPage')
 
@@ -372,7 +372,7 @@ for x in range(N):
 def next_clicked(b):
     current_web_page = web_pages[0]
 
-    if current_web_page == 'warmUpWebPage':
+    if current_web_page == 'comprehensionTestWebPage':
         # The Warm-Up section will have questions for measuring the user's mental mental
         # Check if the questions are answered before continuing with the questionnaire
         pass
