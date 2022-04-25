@@ -56,7 +56,22 @@ while invalid_input:
     else:
         print('Invalid input! Please insert only values 1, 2, 3 or 4.')
 
-templateGenerator(evaluation_type, explanation_assessment_quality)
+print("---------------------------------")  
+print('Question 3\n')
+print('How many questions would you like to have in your questionnaire? The maximum selection is bonded to 5 not to have a too long questionnaire.')
+
+invalid_input = True
+questions_number = str
+
+while invalid_input:
+    questions_number = input('Choice: ')
+
+    if questions_number == '1' or questions_number == '2' or questions_number == '3' or questions_number == '4' or questions_number == '5':
+        invalid_input = False
+    else:
+        print('Invalid input! Please insert only values 1, 2, 3, 4 or 5.')
+
+templateGenerator(evaluation_type, explanation_assessment_quality, questions_number)
 print('\nTemplate Generated!')
 
 

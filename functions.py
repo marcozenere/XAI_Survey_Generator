@@ -17,11 +17,18 @@ def question2RadioButtons():
         disabled=False
         )
 
+def question3RadioButtons():
+    return widgets.RadioButtons(
+        options=[('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'),('5','5')],
+        value=None,
+        disabled=False
+    )
+
     
 def verificationTaskTemplate(evaluation_type): 
     code = """"""
     
-    if evaluation_type.value == '1':
+    if evaluation_type == '1':
         code += """\
 def questionWebPage():
     output.clear_output()
@@ -171,7 +178,7 @@ def questionWebPage():
 
     return code
 
-def templateGenerator(evaluation_type, methodology):
+def templateGenerator(evaluation_type, methodology, questions_number):
     nb = nbf.v4.new_notebook()
     
     code_0 = '''\
@@ -181,6 +188,9 @@ import ipywidgets as widgets
 from datetime import datetime'''
     
     code_1 = """\
+# Dataset Load"""
+    
+    code_2 = """\
 # Definition of the buttons in the questionnaire
 
 next_button = widgets.Button(
@@ -192,21 +202,64 @@ submit_button = widgets.Button(
 )
 
 output = widgets.Output()"""
-
-    code_2 = """\
-# Comprehension Test Section elements definition (radio buttons, dropdowns, etc)"""
     
     code_3 = """\
-#define N, the number of questions in the questionnaire
-N = 1
-questions_numbers = [n for n in range(N)] 
-questions_datetime = []
-questions_representation = []"""
+%%capture
+# Suggested widgets
+# Futher information at https://ipywidgets.readthedocs.io/en/stable/examples/Widget%20List.html
+'''
+# 5 points Likert Scale 
+widgets.SelectionSlider(
+            options=[' 1', '2', '3', '4', '5'],
+            value='3',
+            disabled=False,
+            continuous_update=False,
+            orientation='horizontal',
+            readout=True
+        )
 
-    code_4 = """"""
+# Dropdown
+widgets.Dropdown(
+    options=[('Selection', '*'),('Label 1', '1'), ('Label 2', '2'), ('Label 3', '3')],
+    value= '*',
+)
 
-    if evaluation_type.value == '1':
-        code_4 += """\
+# Radio Buttons
+widgets.RadioButtons(
+        options=[('Label 1', '1'), ('Label 2', '2'), ('Label 3', '3')],
+        value=None,
+        disabled=False
+    )
+
+# Image Loader
+file = open("images/Example.png", "rb")
+image = file.read()
+widgets.Image(
+    value=image,
+    format='png',
+    width=300,
+    height=400,
+)
+'''"""
+
+    code_4 = """\
+# Comprehension Test Section elements definition (radio buttons, dropdowns, etc)
+# Example
+comprehension_selection_example = widgets.RadioButtons(
+                                options=[('Label 1', '1'), ('Label 2', '2'), ('Label 3', '3')],
+                                value=None,
+                                disabled=False
+                      )"""
+    
+    code_5 = """\
+N = %s # Number of questions
+questions_numbers = [n for n in range(N)] # Track the question section in which the user is in
+questions_datetime = [] # Track the time required to complete each of the question section"""%questions_number
+
+    code_6 = """"""
+
+    if evaluation_type == '1':
+        code_6 += """\
 # Preparation of the Questions section of the survey
 
 questions_selection = []
@@ -215,9 +268,12 @@ for x in range(N):
         value='',
         disabled=False
     ))
-# Select the samples you want to use in your evaluation"""
-    elif evaluation_type.value == '2' and methodology.value == '1':
-        code_4 += """\
+    # Additional widgets can be added below, considering the suggested widgets above
+    
+# Select the samples you want to use in your evaluation
+# TO DO"""
+    elif evaluation_type == '2' and methodology == '1':
+        code_6 += """\
 # Preparation of the Questions section of the survey
 
 questions_selection = []
@@ -230,10 +286,11 @@ for x in range(N):
             orientation='horizontal',
             readout=True
         ))
-
-# Select the samples you want to use in your evaluation"""
+    # Additional widgets can be added below, considering the suggested widgets above
+# Select the samples you want to use in your evaluation
+# TO DO"""
     else:
-        code_4 += """\
+        code_6 += """\
 questions_selection = []
 for x in range(N):
     questions_selection.append(widgets.RadioButtons(
@@ -241,9 +298,11 @@ for x in range(N):
         value=None,
         disabled=False
     ))
-# Select the samples you want to use in your evaluation"""
+    # Additional widgets can be added below, considering the suggested widgets above
+# Select the samples you want to use in your evaluation
+# TO DO"""
     
-    code_5 = """\
+    code_7 = """\
 # Preparation of the Participant information section
 
 gender_selection = widgets.RadioButtons(
@@ -270,7 +329,7 @@ english_level_selection = widgets.RadioButtons(
     disabled=False
 )"""
     
-    code_6 = """\
+    code_8 = """\
 def welcomeWebPage():
     output.clear_output()
     with output:
@@ -286,7 +345,7 @@ def welcomeWebPage():
         display(next_button)
     display(output)"""
     
-    code_7 = """\
+    code_9 = """\
 def introductionWebPage():
     
     output.clear_output()
@@ -297,7 +356,7 @@ def introductionWebPage():
         display(widgets.HTML(value = '''<p>Description of the XAI explanation</p>'''))
         display(next_button)"""
     
-    code_8 = """\
+    code_10 = """\
 def exampleWebPage():
     output.clear_output()
     with output:
@@ -305,15 +364,16 @@ def exampleWebPage():
         # Provide an example in order to improve the user's understanding of the XAI explanation
         display(next_button)"""
     
-    code_9 = """\
+    code_11 = """\
 def comprehensionTestWebPage():
     output.clear_output()
     with output:
         display(widgets.HTML(value = '''<h2>Comprehension Test</h2>'''))
         # Test the user's mental model by asking some questions regarding the XAI explanation/domain of interest
+        display(comprehension_selection_example)
         display(next_button)"""
     
-    code_10 = """\
+    code_12 = """\
 def questionnaireInstructionWebPage():
     output.clear_output()
     with output:
@@ -321,30 +381,18 @@ def questionnaireInstructionWebPage():
         display(widgets.HTML(value = '''<p>Provide details on how the survey will be conducted</p>'''))
         display(next_button)"""
     
-    code_11 = """"""
+    code_13 = """"""
     
-    if methodology.value == '1':
-        code_11 += verificationTaskTemplate(evaluation_type)
-    elif methodology.value == '2':
-        code_11 += forcedChoiceTemplate()
-    elif methodology.value == '3':
-        code_11 += forwardSimulationTemplate()
+    if methodology == '1':
+        code_13 += verificationTaskTemplate(evaluation_type)
+    elif methodology == '2':
+        code_13 += forcedChoiceTemplate()
+    elif methodology == '3':
+        code_13 += forwardSimulationTemplate()
     else:
-        code_11 += counterfactualSimulationTask()
+        code_13 += counterfactualSimulationTask()
     
-    """\
-def questionWebPage():
-    output.clear_output()
-    with output:
-        question_number = questions_numbers.pop(0)
-        display(widgets.HTML(value = '''<h2>Question %s</h2>'''%(str(question_number + 1))))
-        # Question Details
-        display(next_button)
-    
-    # Datetime question displayed to the participant
-    questions_datetime.append(datetime.now())"""
-    
-    code_12 = """\
+    code_14 = """\
 def participatInfoWebPage():
     output.clear_output()
     with output:
@@ -361,7 +409,7 @@ def participatInfoWebPage():
         display(submit_button)
         display(widgets.HTML(value = '''<p>NB: The sending of the answers could take a few seconds.</p>'''))"""
     
-    code_13 = """\
+    code_15 = """\
 def endquestionnaireWebPage():
     output.clear_output()
     with output:
@@ -369,7 +417,7 @@ def endquestionnaireWebPage():
         display(widgets.HTML(value = '''<p>The questionnaire was submitted correctly and you can now close the browser tab. <br>
         Thank you very much for the partecipation.</p>'''))"""
     
-    code_14 = """\
+    code_16 = """\
 web_pages_order = [introductionWebPage, exampleWebPage, comprehensionTestWebPage, questionnaireInstructionWebPage, participatInfoWebPage, endquestionnaireWebPage]
 
 index_element = web_pages_order.index(questionnaireInstructionWebPage)
@@ -377,7 +425,7 @@ index_element = web_pages_order.index(questionnaireInstructionWebPage)
 for x in range(N):
     web_pages_order.insert(index_element + 1, questionWebPage)"""
     
-    code_15 = """\
+    code_17 = """\
 web_pages = ['welcomeWebPage', 'introductionWebPage', 'exampleWebPage', 'comprehensionTestWebPage', 'questionnaireInstructionWebPage', 'participatInfoWebPage', 'endquestionnaireWebPage']
 
 index_element = web_pages.index('questionnaireInstructionWebPage')
@@ -385,18 +433,24 @@ index_element = web_pages.index('questionnaireInstructionWebPage')
 for x in range(N):
     web_pages.insert(index_element + 1, 'questionWebPage')"""
     
-    code_16 = """\
+    code_18 = """\
 def next_clicked(b):
     current_web_page = web_pages[0]
 
     if current_web_page == 'comprehensionTestWebPage':
         # The Warm-Up section will have questions for measuring the user's mental mental
         # Check if the questions are answered before continuing with the questionnaire
-        pass
+        
+        # Example considering the basic template elements/widgets
+        if comprehension_selection_example.value == None:
+            return
     elif current_web_page == 'questionWebPage':
         # Each question section will have some questions that the user must answers 
         # Before continuing with the next questions section, check if the user answers all of the questions in the current section
-        pass
+        
+        # Example considering the basic template elements/widgets
+        if (len(questions_numbers) != 0 and questions_selection[questions_numbers[0] - 1].value == None) or (len(questions_numbers) == 0 and questions_selection[N - 1].value == None):
+            return
         
     web_pages.pop(0)
     web_page = web_pages_order.pop(0)
@@ -410,6 +464,7 @@ def submit_clicked(b):
             return
     
     # Store/Send the answers of the user
+    # TO DO
     
     web_pages.pop(0)
     web_page = web_pages_order.pop(0)
@@ -418,7 +473,7 @@ def submit_clicked(b):
 next_button.on_click(next_clicked)
 submit_button.on_click(submit_clicked)"""
     
-    code_17 = """\
+    code_19 = """\
 welcomeWebPage()"""
     
     # Directories Creation
@@ -458,7 +513,9 @@ The 'requirements.txt' file contains the libraries needed to run the application
                nbf.v4.new_code_cell(code_14),
                nbf.v4.new_code_cell(code_15),
                nbf.v4.new_code_cell(code_16),
-               nbf.v4.new_code_cell(code_17)
+               nbf.v4.new_code_cell(code_17),
+               nbf.v4.new_code_cell(code_18),
+               nbf.v4.new_code_cell(code_19)
     ]
     
     nbf.write(nb,'./XAI_Questionnaire/Questionnaire_Template.ipynb')
