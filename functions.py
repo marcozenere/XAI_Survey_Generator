@@ -180,7 +180,7 @@ def questionWebPage():
 
 def templateDownloader():
     from google.colab import files
-    !zip -r ./XAI_Questionnaire.zip XAI_Questionnaire
+    os.system(zip -r ./XAI_Questionnaire.zip XAI_Questionnaire)
     files.download('XAI_Questionnaire.zip')
 
 def templateGenerator(evaluation_type, methodology, questions_number):
