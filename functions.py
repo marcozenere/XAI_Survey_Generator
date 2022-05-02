@@ -1,30 +1,63 @@
 import nbformat as nbf
 import ipywidgets as widgets
 import os
+import functools
+
+survey_generator_widgets = []
 
 def question1RadioButtons():
-
-    return widgets.RadioButtons(
+    question_1_radio_buttons =widgets.RadioButtons(
         options=[('Qualitative Evaluation', '1'), ('Quantitative Evaluation', '2')],
         value=None,
         disabled=False
         )
+    
+    survey_generator_widgets.append(question_1_radio_buttons)
+    return question_1_radio_buttons
 
 def question2RadioButtons():
-    return widgets.RadioButtons(
+    question_2_radio_buttons = widgets.RadioButtons(
         options=[('Verification Task', '1'), ('Forced Choice', '2'), ('Forward Simulation', '3'), ('Counterfactual Simulation Task', '4')],
         value=None,
         disabled=False
         )
+    survey_generator_widgets.append(question_2_radio_buttons)
+    return question_2_radio_buttons
 
-def question3RadioButtons():
-    return widgets.RadioButtons(
-        options=[('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'),('5','5')],
-        value=None,
-        disabled=False
-    )
+def question3IntText():
+    question_3_int_text = widgets.IntText(
+            value = 3,
+            disabled = False)
+    survey_generator_widgets.append(question_3_int_text)
+    return question_3_int_text
 
-    
+def generateButton():
+    return widgets.Button(
+            description='Generate Template',
+            button_style = 'success'
+            )
+
+def imageLoader(image_path):
+    image = open(image_path, "rb")
+    return widgets.Image(
+                    value=image.read(),
+                    format='png',
+                    width=589,
+                    height=262,
+                    )
+
+
+def generate_button_clicked(b, output = None, intepreter_type = ''):
+    output.clear_output()
+    if survey_generator_widgets[0].value != None and survey_generator_widgets[1].value != None:
+        templateGenerator(survey_generator_widgets[0].value, survey_generator_widgets[1].value, str(survey_generator_widgets[2].value), intepreter_type)
+        with output:
+            print('Template Generated')
+    else:
+        with output:
+            print('Please, answers to all the questions')
+        return
+
 def verificationTaskTemplate(evaluation_type): 
     code = """"""
     
@@ -183,7 +216,7 @@ def templateDownloader():
     os.system("zip -r ./XAI_Questionnaire.zip XAI_Questionnaire")
     files.download('XAI_Questionnaire.zip')
 
-def templateGenerator(evaluation_type, methodology, questions_number, intepreter_type):
+def templateGenerator(evaluation_type, methodology, questions_number, intepreter_type = ''):
     nb = nbf.v4.new_notebook()
     
     code_0 = '''\
