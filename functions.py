@@ -178,6 +178,11 @@ def questionWebPage():
 
     return code
 
+def templateDownloader():
+    from google.colab import files
+    !zip -r ./XAI_Questionnaire.zip XAI_Questionnaire
+    files.download('XAI_Questionnaire.zip')
+
 def templateGenerator(evaluation_type, methodology, questions_number):
     nb = nbf.v4.new_notebook()
     
@@ -552,3 +557,6 @@ Instructions extracted from the [Voilà documentation](https://voila.readthedocs
     
     with open('./XAI_Questionnaire/requirements.txt', 'w') as requirements:
         requirements.writelines(requirements_text)
+    
+    if 'google.colab' in str(get_ipython()):
+        templateDownloader()
