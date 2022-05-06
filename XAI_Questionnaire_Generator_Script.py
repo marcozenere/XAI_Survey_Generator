@@ -14,12 +14,12 @@ print("---------------------------------")
 print('Question 1\n')
 
 print('Qualitative Evaluation')
-print("A qualitative evaluation consists of open-ended questions. The questions' answers are more complex to analyse than quatitative evaluation, but it allows to do deeper analysis on the answers.\n")
+print("A qualitative evaluation typically consists of open-ended questions that gather no numerical data to achieve deeper insight into linguistic choices made by the system.\n")
 
 print('Quantitative Evaluation')
-print("A quantitative evaluation consists on close-ended questions. The following evaluation allows to do statistical analysis easier than qualitative evaluation.\n")
+print("A qualitative evaluation, often viewed as scientifically objective and rational, typically consists of close-ended questions which gather numerical data. It is most well suited for testing hypotheses and statistical analysis.\n")
 
-print('Considering the following definitions, what type of evaluation you would like to do in your questionnaire? Type 1 for Qualitative Evaluation or 2 otherwise.')
+print('Considering the provided definitions, what type of evaluation you would like to do in your questionnaire? Type 1 for Qualitative Evaluation or 2 otherwise.')
 
 invalid_input = True
 evaluation_type = str
@@ -58,7 +58,7 @@ while invalid_input:
 
 print("---------------------------------")  
 print('Question 3\n')
-print('How many questions would you like to have in your questionnaire? The maximum selection is bonded to 5 not to have a too long questionnaire.')
+print('How many questions would you like to have in your questionnaire?')
 
 invalid_input = True
 questions_number = str
@@ -66,10 +66,10 @@ questions_number = str
 while invalid_input:
     questions_number = input('Choice: ')
 
-    if questions_number == '1' or questions_number == '2' or questions_number == '3' or questions_number == '4' or questions_number == '5':
+    if questions_number.isnumeric() and questions_number >= '1':
         invalid_input = False
     else:
-        print('Invalid input! Please insert only values 1, 2, 3, 4 or 5.')
+        print('Invalid input! Please insert an integer value')
 
 templateGenerator(evaluation_type, explanation_assessment_quality, questions_number)
 print('\nTemplate Generated!')
