@@ -17,7 +17,7 @@ def question1RadioButtons():
 
 def question2RadioButtons():
     question_2_radio_buttons = widgets.RadioButtons(
-        options=[('Verification Task', '1'), ('Forced Choice', '2'), ('Forward Simulation', '3'), ('Counterfactual Simulation Task', '4')],
+        options=[('Verification', '1'), ('Forced Choice', '2'), ('Forward Simulation', '3'), ('Counterfactual Simulation', '4')],
         value=None,
         disabled=False
         )
@@ -42,8 +42,8 @@ def imageLoader(image_path):
     return widgets.Image(
                     value=image.read(),
                     format='png',
-                    width=589,
-                    height=262,
+                    width=605,
+                    height=275,
                     )
 
 
@@ -58,7 +58,7 @@ def generate_button_clicked(b, output = None, intepreter_type = ''):
             print('Please, answers to all the questions')
         return
 
-def verificationTaskTemplate(evaluation_type): 
+def verificationTemplate(evaluation_type): 
     code = """"""
     
     if evaluation_type == '1':
@@ -177,7 +177,7 @@ def questionWebPage():
 
     return code
 
-def counterfactualSimulationTask():
+def counterfactualSimulationTemplate():
     code = """\
 def questionWebPage():
     output.clear_output()
@@ -428,13 +428,13 @@ def questionnaireInstructionWebPage():
     code_13 = """"""
     
     if methodology == '1':
-        code_13 += verificationTaskTemplate(evaluation_type)
+        code_13 += verificationTemplate(evaluation_type)
     elif methodology == '2':
         code_13 += forcedChoiceTemplate()
     elif methodology == '3':
         code_13 += forwardSimulationTemplate()
     else:
-        code_13 += counterfactualSimulationTask()
+        code_13 += counterfactualSimulationTemplate()
     
     code_14 = """\
 def participatInfoWebPage():
