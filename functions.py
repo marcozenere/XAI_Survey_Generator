@@ -216,7 +216,7 @@ def templateDownloader():
     os.system("zip -r ./XAI_Questionnaire.zip XAI_Questionnaire")
     files.download('XAI_Questionnaire.zip')
 
-def templateGenerator(evaluation_type, methodology, questions_number, intepreter_type = ''):
+def templateGenerator(evaluation_type = '2', methodology = '3', questions_number = '3', intepreter_type = ''):
     nb = nbf.v4.new_notebook()
     
     code_0 = '''\
