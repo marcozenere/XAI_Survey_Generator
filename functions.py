@@ -378,7 +378,10 @@ def welcomeWebPage():
     output.clear_output()
     with output:
         display(widgets.HTML(value = '''<h1>Questionnaire Title</h1>'''))
-        display(widgets.HTML(value = '''<p>Description of the Questionnaire</p>'''))
+        display(widgets.HTML(value = '''<p>Welcome! This questionnaire aims to evaluate "type of evaluation XXX". In this survey, you will be asked to evaluate explanations in terms of "evaluation methodology YYY" following the instructions outlined in the next screens. 
+        This study is carried out by researchers from "University UUU". The information that we collect is in agreement with European Union's General Data Protection Regulation (<a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj">GDPR</a>). In addition, this research has been approved by the related Ethics Committee. It is meant for research purposes only and based on non-personal or anonymous data which is provided during your voluntary participation.</p>'''))
+        display(widgets.HTML(value = '''<p>It is expected to take you about "time MMM" minutes to complete the survey. During that time, please, focus only on the survey and avoid any unnecessary interruptions until it is completed. If any break is needed, take it between tasks.<br>
+        Should you have any questions regarding this survey, please address them to 'person PPP' (ppp@ppp.com), the survey and data manager, before starting.</p>'''))
         display(widgets.HTML(value = '''<p>By clicking the next button, you participate to the questionnaire and confirm that:<br>
         <ul>
             <li> You have reached the age of majority </li>
