@@ -379,7 +379,7 @@ def welcomeWebPage():
     with output:
         display(widgets.HTML(value = '''<h1>Questionnaire Title</h1>'''))
         display(widgets.HTML(value = '''<p>Description of the Questionnaire</p>'''))
-        display(widgets.HTML(value = '''<p>By clicking the next button, you partecipate to the questionnaire and confirm that:<br>
+        display(widgets.HTML(value = '''<p>By clicking the next button, you participate to the questionnaire and confirm that:<br>
         <ul>
             <li> You have reached the age of majority </li>
             <li> You acknowledge that your participation is completely voluntary </li>
@@ -478,8 +478,12 @@ for x in range(N):
     web_pages.insert(index_element + 1, 'questionWebPage')"""
     
     code_18 = """\
+error_message = False"""
+    
+    code_19 = """\
 def next_clicked(b):
     current_web_page = web_pages[0]
+    global error_message
 
     if current_web_page == 'comprehensionTestWebPage':
         # The Warm-Up section will have questions for measuring the user's mental mental
@@ -487,14 +491,29 @@ def next_clicked(b):
         
         # Example considering the basic template elements/widgets
         if comprehension_selection_example.value == None:
+            if error_message == False:
+                error_message = True
+                with output:
+                    display(widgets.HTML(value = '''<p>Answer all the questions before continuing!</p>'''))
             return
+        
+        if error_message:
+            error_message = False
+            
     elif current_web_page == 'questionWebPage':
         # Each question section will have some questions that the user must answers 
         # Before continuing with the next questions section, check if the user answers all of the questions in the current section
         
         # Example considering the basic template elements/widgets
         if (len(questions_numbers) != 0 and questions_selection[questions_numbers[0] - 1].value == None) or (len(questions_numbers) == 0 and questions_selection[N - 1].value == None):
+            if error_message == False:
+                error_message = True
+                with output:
+                    display(widgets.HTML(value = '''<p>Answer all the questions before continuing!</p>'''))
             return
+        
+        if error_message:
+            error_message = False
         
     web_pages.pop(0)
     web_page = web_pages_order.pop(0)
@@ -502,10 +521,18 @@ def next_clicked(b):
 
 def submit_clicked(b):
     current_web_page = web_pages[0]
+    global error_message
     
     if current_web_page == 'participatInfoWebPage':
         if gender_selection.value == None or age_selection.value == None or education_selection.value == None or english_level_selection.value == None:
+            if error_message == False:
+                error_message = True
+                with output:
+                    print('Answer all the questions before continuing!')
             return
+            
+        if error_message:
+            error_message = False
     
     # Store/Send the answers of the user
     # TO DO
@@ -517,7 +544,7 @@ def submit_clicked(b):
 next_button.on_click(next_clicked)
 submit_button.on_click(submit_clicked)"""
     
-    code_19 = """\
+    code_20 = """\
 welcomeWebPage()"""
     
     # Directories Creation
@@ -580,7 +607,8 @@ Instructions extracted from the [Voilà documentation](https://voila.readthedocs
                nbf.v4.new_code_cell(code_16),
                nbf.v4.new_code_cell(code_17),
                nbf.v4.new_code_cell(code_18),
-               nbf.v4.new_code_cell(code_19)
+               nbf.v4.new_code_cell(code_19),
+               nbf.v4.new_code_cell(code_20)
     ]
     
     nbf.write(nb,'./XAI_Questionnaire/Questionnaire_Template.ipynb')
