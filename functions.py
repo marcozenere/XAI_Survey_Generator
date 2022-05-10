@@ -49,8 +49,8 @@ def imageLoader(image_path):
 
 def generate_button_clicked(b, output = None, intepreter_type = ''):
     output.clear_output()
-    if survey_generator_widgets[0].value != None and survey_generator_widgets[1].value != None:
-        templateGenerator(survey_generator_widgets[0].value, survey_generator_widgets[1].value, str(survey_generator_widgets[2].value), intepreter_type)
+    if survey_generator_widgets[0].value != None:
+        templateGenerator(evaluation_type = survey_generator_widgets[0].value, questions_number = str(survey_generator_widgets[1].value), intepreter_type = intepreter_type)
         with output:
             print('Template Generated')
     else:
