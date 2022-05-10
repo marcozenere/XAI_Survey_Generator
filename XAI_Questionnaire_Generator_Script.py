@@ -38,13 +38,16 @@ print('The evaluation that we normally would like to make when carrying out a qu
 print("* Trasparency: How the system works\n* Scrutability: Identification of a wrongly system\n* Trust:Increase of user's confidence in the system\n* Persuasiveness: Convince the user to perform a action\n* Satisfaction: Increase the ease of use or enjoyment")
 print("* Effectiveness: Helping the user to make good decisions\n* Efficiency: Help the user to make decisions faster\n* Education: Allow the user to generalize and learn\n* Debugging: Helping the user to make good decisions\n")
 
-print('To test the hypothesis, it is necessary to use a methodology. Four different methodologies can be used for this purpose, and each differs in the evaluation method and information provided to the user.\n')
+print('The selection of one or more explanation goals, after choosing the hypothesis to be empirically validated with your XAI evaluation, defines the type of task to carry out the desired empirical validation. Each task is aimed for a different goal, uses a specific evaluation method and provides survey participants with different information.\n')
 print('* Verification Task: The verification task methodology requires an input, output, and explanation. The goal is to ask the user its satisfaction with the given explanation with respect to the input and output.')
 print('* Forced Choice: The forced choice methodology requires an input, output, and several explanations. The goal is to ask the user to choose among the explanations provided the one it preferers with respect to the input and output.')
 print("* Forward Simulation: The forward simulation methodology requires an input and an explanation. The goal is to ask the user to predict the system's output given the input and the explanation of the system's output.")
 print('* CounterFactual Simulation Task: The counterfactual simulation task methodology requires two samples and the following information of the two: the input, output, and explanation of the first sample and the output of the second one. The goal is to ask the user the input changes to get the output of the sample 2.\n')
-print('Considering the provided information, which methodology would you like to use to test the explanation goal/goals you fixed? Type 1 for Verification Task, 2 for Forced Choice, 3 for Forward Simulation, 4 for CounterFactual Simulation Task.')
+print('In the current version of the software, the correlation between the explanation goals and the task types is not implemented yet. For the master thesis, the selection is forced to "Transparency" as the explanation goal and "Forward simulation" as the task type. The selection is based on the desired empirical evaluation we would like to carry out in the XAI Survey available at https://github.com/marcozenere/XAI_Survey.')
 
+"""
+# Code useful for future work
+ 
 invalid_input = True
 explanation_assessment_quality = str
 
@@ -55,6 +58,7 @@ while invalid_input:
         invalid_input = False
     else:
         print('Invalid input! Please insert only values 1, 2, 3 or 4.')
+"""
 
 print("---------------------------------")  
 print('Question 3\n')
@@ -71,7 +75,7 @@ while invalid_input:
     else:
         print('Invalid input! Please insert an integer value')
 
-templateGenerator(evaluation_type, explanation_assessment_quality, questions_number)
+templateGenerator(evaluation_type = evaluation_type, questions_number = questions_number)
 print('\nTemplate Generated!')
 
 

@@ -3,8 +3,10 @@ import ipywidgets as widgets
 import os
 import functools
 
+# List of ipywidgets
 survey_generator_widgets = []
 
+# Creation and definition of the radio button for the first question of the XAI Questionnaire Generator
 def question1RadioButtons():
     question_1_radio_buttons =widgets.RadioButtons(
         options=[('Qualitative Evaluation', '1'), ('Quantitative Evaluation', '2')],
@@ -15,6 +17,9 @@ def question1RadioButtons():
     survey_generator_widgets.append(question_1_radio_buttons)
     return question_1_radio_buttons
 
+# Creation and definition of the radio button for the second question of the XAI Questionnaire Generator
+# In the current version of the XAI Questionnaire Generator this ipywidgets is not used
+'''
 def question2RadioButtons():
     question_2_radio_buttons = widgets.RadioButtons(
         options=[('Verification', '1'), ('Forced Choice', '2'), ('Forward Simulation', '3'), ('Counterfactual Simulation', '4')],
@@ -23,7 +28,9 @@ def question2RadioButtons():
         )
     survey_generator_widgets.append(question_2_radio_buttons)
     return question_2_radio_buttons
+'''
 
+# Creation and definition of the int text for the third question of the XAI Questionnaire Generator
 def question3IntText():
     question_3_int_text = widgets.IntText(
             value = 3,
@@ -31,12 +38,14 @@ def question3IntText():
     survey_generator_widgets.append(question_3_int_text)
     return question_3_int_text
 
+# Creation and definition of the generate button of the XAI Questionnaire Generator
 def generateButton():
     return widgets.Button(
             description='Generate Template',
             button_style = 'success'
             )
 
+# Image Loader of the XAI Questionnaire Generator
 def imageLoader(image_path):
     image = open(image_path, "rb")
     return widgets.Image(
@@ -47,8 +56,10 @@ def imageLoader(image_path):
                     )
 
 
+# Event definition of the "generate" button
 def generate_button_clicked(b, output = None, intepreter_type = ''):
     output.clear_output()
+    # Checks if the values of the widgets are not None. The value None in a widget means that the user has not provided a preference yet
     if survey_generator_widgets[0].value != None:
         templateGenerator(evaluation_type = survey_generator_widgets[0].value, questions_number = str(survey_generator_widgets[1].value), intepreter_type = intepreter_type)
         with output:
@@ -58,6 +69,7 @@ def generate_button_clicked(b, output = None, intepreter_type = ''):
             print('Please, answers to all the questions')
         return
 
+# Template of Verification task
 def verificationTemplate(evaluation_type): 
     code = """"""
     
@@ -118,6 +130,7 @@ def questionWebPage():
 
     return code
 
+# Template of Forced Choice task
 def forcedChoiceTemplate():
     code = """\
 def questionWebPage():
@@ -150,6 +163,7 @@ def questionWebPage():
     
     return code
 
+# Template of Forward Simulation task
 def forwardSimulationTemplate():
     code = """\
 def questionWebPage():
@@ -177,6 +191,7 @@ def questionWebPage():
 
     return code
 
+# Template of Counterfactual Simulation task
 def counterfactualSimulationTemplate():
     code = """\
 def questionWebPage():
@@ -211,11 +226,15 @@ def questionWebPage():
 
     return code
 
+# Function to download the XAI questionnaire template if the XAI Survey Generator software is running in Google Colaboratory
 def templateDownloader():
     from google.colab import files
     os.system("zip -r ./XAI_Questionnaire.zip XAI_Questionnaire")
     files.download('XAI_Questionnaire.zip')
 
+# Function to generate the XAI questionnaire template
+# The function has a default value for each parameters 
+# Evaluation_type = 2 means Quantitative Evaluation, Methodology = 3 means Forward simulation
 def templateGenerator(evaluation_type = '2', methodology = '3', questions_number = '3', intepreter_type = ''):
     nb = nbf.v4.new_notebook()
     
@@ -578,6 +597,11 @@ Instructions extracted from the [Voilà documentation](https://voila.readthedocs
 - Click the **'Launch'** button. 
   
 **NB: The service could take a few minutes to launch the application if it is the first launch.**
+
+
+## Note Dated 10th of May 2022
+
+The Google Colab platform does not fully support ipywidgets library, and the developed windows/screens of the XAI survey in the current version of the software do not work well. The suggestion is to complete and test the questionnaire template locally on your computer with Jupyter or Jupyter Lab.
 
 ## Required Libraries to Run the Questionnaire Template
 
