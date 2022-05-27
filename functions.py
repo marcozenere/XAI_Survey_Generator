@@ -318,7 +318,7 @@ comprehension_selection_example = widgets.RadioButtons(
 N = %s # Number of questions
 questions_numbers = [n for n in range(N)] # Track the question section in which the user is in
 questions_datetime = [] # Track the time required to complete each of the question section
-comprehension_test_datetime = [] Track the time required to complete each of the comprehension section# """%questions_number
+comprehension_test_datetime = [] #Track the time required to complete the comprehension section"""%questions_number
 
     code_6 = """"""
 
@@ -440,8 +440,8 @@ def comprehensionTestWebPage():
         display(comprehension_selection_example)
         display(next_button)
         
-        # Datetime question displayed to the participant
-        comprehension_test_datetime.append(datetime.now())"""
+    # Datetime question displayed to the participant
+    comprehension_test_datetime.append(datetime.now())"""
     
     code_12 = """\
 def questionnaireInstructionWebPage():
@@ -451,8 +451,8 @@ def questionnaireInstructionWebPage():
         display(widgets.HTML(value = '''<p>Provide details on how the survey will be conducted</p>'''))
         display(next_button)
         
-        # Datetime comprehension test was completed by the participant
-        comprehension_test_datetime.append(datetime.now())"""
+    # Datetime comprehension test was completed by the participant
+    comprehension_test_datetime.append(datetime.now())"""
     
     code_13 = """"""
     
