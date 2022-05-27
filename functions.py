@@ -317,7 +317,8 @@ comprehension_selection_example = widgets.RadioButtons(
     code_5 = """\
 N = %s # Number of questions
 questions_numbers = [n for n in range(N)] # Track the question section in which the user is in
-questions_datetime = [] # Track the time required to complete each of the question section"""%questions_number
+questions_datetime = [] # Track the time required to complete each of the question section
+comprehension_test_datetime = [] Track the time required to complete each of the comprehension section# """%questions_number
 
     code_6 = """"""
 
@@ -437,7 +438,10 @@ def comprehensionTestWebPage():
         display(widgets.HTML(value = '''<h2>Comprehension Test</h2>'''))
         # Test the user's mental model by asking some questions regarding the XAI explanation/domain of interest
         display(comprehension_selection_example)
-        display(next_button)"""
+        display(next_button)
+        
+        # Datetime question displayed to the participant
+        comprehension_test_datetime.append(datetime.now())"""
     
     code_12 = """\
 def questionnaireInstructionWebPage():
@@ -445,7 +449,10 @@ def questionnaireInstructionWebPage():
     with output:
         display(widgets.HTML(value = '''<h2>Survey Instruction</h2>'''))
         display(widgets.HTML(value = '''<p>Provide details on how the survey will be conducted</p>'''))
-        display(next_button)"""
+        display(next_button)
+        
+        # Datetime comprehension test was completed by the participant
+        comprehension_test_datetime.append(datetime.now())"""
     
     code_13 = """"""
     
